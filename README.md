@@ -23,7 +23,7 @@ Also set SimpleSSHD to start on boot.
 Connect the phone to the router (dlink-5BF0) and set Static IP adress 192.168.0.X in the wifi settings.
 
 ### Compiling on the phone
-Run
+Run  
 	`scp -P 2222 copy\ to\ each\ phone/* 192.168.0.X:~`  
 from this repo.
 Then ssh into the phone  
