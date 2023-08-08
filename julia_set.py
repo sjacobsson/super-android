@@ -5,20 +5,29 @@ import threading
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
+phones = [
+    # "192.168.0.2",
+    # "192.168.0.8",
+    "192.168.0.5",
+    "192.168.0.6",
+    # "192.168.0.7",
+    ]
+nbr_phones = len(phones)
+
 # Image width and height in pixels; parameters for the plot
-width, height = 1000, 1000
+width, height = 200 * nbr_phones, 200 * nbr_phones
 i_max = 1000
 zabs_max = 10.0
 xmin, xmax = -1.5, 1.5
-xwidth = xmax - xmin
+dx = xmax - xmin
 ymin, ymax = -1.5, 1.5
-yheight = ymax - ymin
+dy = ymax - ymin
 
 # Map pixel position to a point in the complex plane
 def z(i, j):
     return complex(
-        i / width * xwidth + xmin,
-        j / height * yheight + ymin
+        i / width * dx + xmin,
+        j / height * dy + ymin
     )
 
 def julia(z, c=complex(-0.1, 0.65)):
@@ -37,31 +46,40 @@ import paramiko
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
+# Initialize Julia set
 J = np.zeros((width, height))
 
 class FractalThread (threading.Thread):
-    def __init__(self, number, width, height, coords):
-        self.number, self.width, self.height, self.coords = number, width, height, coords
+    def __init__(self, phone_index, width_, height_, coords):
+        self.phone_index, self.width_, self.height_, self.coords = phone_index, width_, height_, coords
         threading.Thread.__init__(self)
 
     def run(self):
-        print(f"Starting {self.number}")
-        number, width, height, coords = self.number, self.width, self.height, self.coords
+        print(f"Starting {phones[self.phone_index]}")
+        phone_index, width_, height_, coords = self.phone_index, self.width_, self.height_, self.coords
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         # ssh.connect(f"192.168.0.{number}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file("/home/arne/.ssh/id_phones"))
-        ssh.connect(f"192.168.0.{number}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file("/home/simonj/.ssh/id_ed25519"))
-        _, out, _ = ssh.exec_command(f"su -c './a.out {int(width / 2)} {height} {' '.join(map(str, coords))}'")
-        if number == 1: # TODO: The regions should be generalised
-            J[int(width / 2):, :] = np.reshape([float(s) for s in out.read().splitlines()], (int(width / 2), height))
-        else:
-            J[:int(width / 2), :] = np.reshape([float(s) for s in out.read().splitlines()], (int(width / 2), height))
-        print(f"Ending {number}")
+        ssh.connect(f"{phones[phone_index]}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file("/home/simonj/.ssh/id_ed25519"))
+        _, out, _ = ssh.exec_command(f"su -c './a.out {width_} {height_} {' '.join(map(str, coords))}'")
+
+        print(f"{phones[phone_index]}$", f"su -c './a.out {width_} {height_} {' '.join(map(str, coords))}'")
+        J[(phone_index * width_):((phone_index + 1) * width_), :] = np.reshape([float(s) for s in out.read().splitlines()], (width_, height_))
 
 threads = [
-    FractalThread(1, width, height, [0, 1.5, -1.5, -1.5]),
-    FractalThread(2, width, height, [1.5, 1.5, 0, -1.5]),
+    FractalThread(
+        i,
+        int(width / nbr_phones),
+        height,
+        [
+            xmax - dx * i / nbr_phones,
+            ymax,
+            xmax - dx * (i + 1) / nbr_phones,
+            ymin
+        ]
+    )
+    for i in range(nbr_phones)
 ]
 
 use_phones = True

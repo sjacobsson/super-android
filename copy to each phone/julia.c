@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 
 	std::complex<double> c = std::complex<double>(-0.1, 0.65);
 	for (int i = 0; i < res_real; i++) {
-		for (int j = 0; j < res_real; j++) {
+		for (int j = 0; j < res_imag; j++) {
 			std::complex<double> z = get_z(i, j, res_real, res_imag, upper_left_real, upper_left_imag, lower_right_real, lower_right_imag);
 			printf("%f\n", julia(real(z), imag(z), real(c), imag(c)));
 		}
