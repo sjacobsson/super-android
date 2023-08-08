@@ -6,16 +6,17 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 phones = [
-    # "192.168.0.2",
-    # "192.168.0.8",
+    "192.168.0.2",
     "192.168.0.5",
     "192.168.0.6",
-    # "192.168.0.7",
+    "192.168.0.7",
+    "192.168.0.8",
+    # Protip: don't use the adress 192.168.0.1
     ]
 nbr_phones = len(phones)
 
 # Image width and height in pixels; parameters for the plot
-width, height = 200 * nbr_phones, 200 * nbr_phones
+width, height = 400 * nbr_phones, 400 * nbr_phones # Make sure these are divisble by nbr_phones
 i_max = 1000
 zabs_max = 10.0
 xmin, xmax = -1.5, 1.5
@@ -64,8 +65,8 @@ class FractalThread (threading.Thread):
         ssh.connect(f"{phones[phone_index]}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file("/home/simonj/.ssh/id_ed25519"))
         _, out, _ = ssh.exec_command(f"su -c './a.out {width_} {height_} {' '.join(map(str, coords))}'")
 
-        print(f"{phones[phone_index]}$", f"su -c './a.out {width_} {height_} {' '.join(map(str, coords))}'")
         J[(phone_index * width_):((phone_index + 1) * width_), :] = np.reshape([float(s) for s in out.read().splitlines()], (width_, height_))
+        print(f"Ending {phones[self.phone_index]}")
 
 threads = [
     FractalThread(
