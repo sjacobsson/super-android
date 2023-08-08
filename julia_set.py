@@ -50,8 +50,9 @@ class FractalThread (threading.Thread):
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(f"192.168.0.{number}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file("/home/arne/.ssh/id_phones"))
-        _, out, _ = ssh.exec_command(f"su -c 'super\ android/a.out {int(width / 2)} {height} {' '.join(map(str, coords))}'")
+        # ssh.connect(f"192.168.0.{number}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file("/home/arne/.ssh/id_phones"))
+        ssh.connect(f"192.168.0.{number}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file("/home/simonj/.ssh/id_ed25519"))
+        _, out, _ = ssh.exec_command(f"su -c './a.out {int(width / 2)} {height} {' '.join(map(str, coords))}'")
         if number == 1: # TODO: The regions should be generalised
             J[int(width / 2):, :] = np.reshape([float(s) for s in out.read().splitlines()], (int(width / 2), height))
         else:
