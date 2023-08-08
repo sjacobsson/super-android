@@ -16,7 +16,7 @@ phones = [
 nbr_phones = len(phones)
 
 # Image width and height in pixels; parameters for the plot
-width, height = 400 * nbr_phones, 400 * nbr_phones # Make sure these are divisble by nbr_phones
+width, height = 200 * nbr_phones, 200 * nbr_phones # Make sure these are divisble by nbr_phones
 i_max = 1000
 zabs_max = 10.0
 xmin, xmax = -1.5, 1.5

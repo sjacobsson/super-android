@@ -24,7 +24,7 @@ Connect the phone to the router (dlink-5BF0) and set Static IP adress 192.168.0.
 
 ### Compiling on the phone
 Run  
-	`scp -P 2222 copy\ to\ each\ phone/* 192.168.0.X:~`  
+	`scp -rP 2222 copy\ to\ each\ phone/* 192.168.0.X:~`  
 from this repo.
 Then ssh into the phone  
 	`ssh -p 2222 192.168.0.X mv profile .profile`  
