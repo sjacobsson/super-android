@@ -1,5 +1,11 @@
 Git repo for super android project. Distributed computing on android phones.
 
+First additionally clone the submodules:
+```sh
+git submodule init
+git submodule update
+```
+
 # Setting up a phone
 
 ### Install LineageOS
