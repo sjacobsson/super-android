@@ -1,10 +1,14 @@
 Git repo for super android project. Distributed computing on android phones.
 
+# Prefetching everything on your machine
+
 First additionally clone the submodules:
 ```sh
 git submodule init
 git submodule update
 ```
+
+And then fetch the needed libraries for Rust to compile offline by running `online_fetch.sh` from within `copy to each phone/super-pi-ray/`.
 
 # Setting up a phone
 
@@ -22,7 +26,7 @@ Usually, if using the LineageOS custom recovery or TWRP, this is just
 
 ### Apps
 On the phone, install F-Droid, then SimpleSSHD and Termux from F-Droid.
-Then install gcc in termux by `pkg install clang`.
+Then install gcc in termux by `pkg install clang`, and `rust` by `pkg install rust openssl`.
 Also set SimpleSSHD to start on boot.
 
 ### Network
@@ -41,6 +45,9 @@ While ssh'd into the phone, run
 	`g++ julia.c`  
 to generate an executable.
 
+And/or,
+	`offline_build.sh`
+from within `super-pi-ray`.
 
 # Running a compute
 
