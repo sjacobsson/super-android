@@ -22,7 +22,7 @@ class PhoneThread (threading.Thread):
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(f"{PHONES[self.phone_index]}", port=2222, pkey=paramiko.Ed25519Key.from_private_key_file(open('.pkey').read().strip()))
+        ssh.connect(f"{PHONES[self.phone_index]}", port=2222, pkey=paramiko.RSAKey.from_private_key_file('.ssh/id_rsa'))
         arg_string = ' '.join(map(lambda arg: f'"{arg}"', self.args))
         _, out, _ = ssh.exec_command(f"su -c './{self.application}_client {arg_string}'")
 
