@@ -8,6 +8,7 @@ PHONES = [
     "192.168.0.6",
     "192.168.0.7",
     "192.168.0.8",
+    "192.168.0.9",
 ]
 
 class PhoneThread (threading.Thread):
