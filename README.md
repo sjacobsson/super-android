@@ -38,11 +38,11 @@ Connect the phone to the router (dlink-5BF0) and set Static IP adress 192.168.0.
 
 ### Compiling on the phone
 Run  
-	`scp -rP 2222 copy\ to\ each\ phone/* 192.168.0.X:~`  
+	`scp -rP 2222 -i .ssh/id_rsa copy\ to\ each\ phone/* 192.168.0.X:~`  
 from this repo.
 Then ssh into the phone  
-	`ssh -p 2222 192.168.0.X mv profile .profile`  
-	`ssh -p 2222 192.168.0.X`  
+	`ssh -p 2222 -i .ssh/id_rsa 192.168.0.X mv profile .profile`  
+	`ssh -p 2222 -i .ssh/id_rsa 192.168.0.X`  
 and grant SimpleSSHD super user rights in the Magisk popup on the phone.
 
 While ssh'd into the phone, run  
