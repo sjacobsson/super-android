@@ -6,6 +6,7 @@
 // Evert
 
 use std::env;
+use std::fs::File;
 
 use srray::camera::Camera;
 use srray::color::Color;
@@ -86,5 +87,9 @@ fn main() {
         background: Box::new(None {}),
     };
 
-    camera.render_section(&scene, xmin, xmax, ymin, ymax).save("out.png").unwrap();
+    let mut file = File::create("out.ppm").unwrap();
+    camera
+        .render_section(&scene, xmin, xmax, ymin, ymax)
+        .write_binary_ppm(&mut file)
+        .unwrap();
 }
