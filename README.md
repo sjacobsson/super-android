@@ -55,9 +55,6 @@ from within `super-pi-ray`.
 
 # Running a compute
 
-### Set up communication with the phones
-Create an SSH key pair of type `ed25519` (`ssh-keygen -t ed25519`) and ask someone to place the public key on each of the phones. Then create a file named `.pkey` (which is ignored by Git) in the root of this repository, containing the **path to** your private key.
-
 ### Run the application server
 Ensure Python 3 is installed on your machine. Then choose an application from the [table](#table-of-available-applications) and run
 ```python3
