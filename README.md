@@ -1,62 +1,73 @@
 Git repo for super android project. Distributed computing on android phones.
 
-# Table of available applications
+# Table of available demos
 | Name | Description |
 | ---- | ----------- |
-| `julia_set` | Compute the Julia set |
+| `Render farm` | Render some rad fractals |
 
-# Cloning this repository
-Clone this repository and got to its root folder. Then clone the submodules with
-```sh
-git submodule init
-git submodule update
-```
 
-And then fetch the needed libraries for Rust to compile offline by running `online_fetch.sh` from within `copy to each phone/super-pi-ray/`.
+# Setting up a phone to be a server
 
-# Setting up a phone
+(The next two steps can be skipped).
 
 ### Install LineageOS
 Look up if the device is supported and then follow the corresponding guide: https://wiki.lineageos.org/devices/
 
+
 ### Root
-Usually, if using the LineageOS custom recovery or TWRP, this is just  
-	1. Download the Magisk .apk to the phone from their github  
- 	2. Rename the .apk to .zip  
-  	3. Boot into recovery  
-   	4. Install > Install Zip > X.zip > Flash  
-    	5. Reboot  
-     	6. Open the Magisk app and follow the suggested setup there  
+Usually, if using the LineageOS custom recovery or TWRP, this is just 
+1. Download the Magisk .apk to the phone from their github
+2. Rename the .apk to .zip
+3. Boot into recovery
+4. Install > Install Zip > X.zip > Flash
+5. Reboot
+6. Open the Magisk app and follow the suggested setup there
+
 
 ### Apps
-On the phone, install F-Droid, then SimpleSSHD and Termux from F-Droid.
-Then install gcc in termux by `pkg install clang`, and `rust` by `pkg install rust openssl`.
-Also set SimpleSSHD to start on boot.
+On the phone, install F-Droid from https://f-droid.org/. Then from F-Droid install
+1. Termux. In termux, run
+	1. `pkg update` (you might have to change repo)
+	2. `pkg upgrade`
+	3. `pkg install openssh`
+	4. `pkg install rust`
+2. Advanced Charging Controller (ACCA).
+3. Keep Screen On, and add as quick settings tile.
+
+<!-- Then install gcc in termux by `pkg install clang`, and `rust` by `pkg install rust openssl`. -->
 
 ### Network
 Connect the phone to the router (dlink-5BF0) and set Static IP adress 192.168.0.X in the wifi settings.
 
-### Compiling on the phone
-Run  
-	`scp -rP 2222 -i .ssh/id_rsa copy\ to\ each\ phone/* 192.168.0.X:~`  
-from this repo.
-Then ssh into the phone  
-	`ssh -p 2222 -i .ssh/id_rsa 192.168.0.X mv profile .profile`  
-	`ssh -p 2222 -i .ssh/id_rsa 192.168.0.X`  
-and grant SimpleSSHD super user rights in the Magisk popup on the phone.
+In termux, run
+1. `passwd` and set some easy to remember password
+2. `sshd`
 
-While ssh'd into the phone, run  
-	`g++ <application>_client.c -o <application>_client`  
-to generate an executable. Here, the `<application>` can be any of the applications in the [table](#table-of-available-applications).
+On the client, run
+1. `git clone https://gitlab.kuleuven.be/numa/oppc/super-android/supanrf`
 
-And/or,
-	`offline_build.sh`
-from within `super-pi-ray`.
+Then connect to the router and run
+1. `cd supanrf`
+2. `scp -P 8022 <publickey> 192.168.0.X:.ssh/authorized_keys`
 
-# Running a compute
+where `<publickey>` is the path to your public ssh key. You are now queried for the password you set earlier. Lastly, run
+1. `./copy-to-device 192.168.0.X`
+<!-- TODO: Rename the supanrf to ETP -->
+<!-- TODO: Write guide for the render farm as well -->
 
-### Run the application server
-Ensure Python 3 is installed on your machine. Then choose an application from the [table](#table-of-available-applications) and run
-```python3
-python3 <application>_server.py
-```
+On the server, in Termux, run
+1. `cd supannn`
+2. `./supannn`
+
+ETP should now be running on the server.
+
+You are now ready to run any of the demos in the table above.
+
+
+# What parts needs to be done each time
+
+Each time a server is started, we just again run, in Termux,
+1. `cd supannn`
+2. `./supannn`
+
+TODO: What about ACCA and Keep Screen On?
