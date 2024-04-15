@@ -5,6 +5,8 @@ Git repo for super android project. Distributed computing on android phones.
 | ---- | ----------- |
 | `Render farm` | Render some rad fractals |
 
+TODO: Link to these.
+
 
 # Setting up a phone to be a server
 
