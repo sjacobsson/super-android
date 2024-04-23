@@ -1,0 +1,41 @@
+192.168.0.2
+GT-I9505
+CPU: Quad-core 1.9 GHz Krait 300
+RAM: 2GB
+https://www.gsmarena.com/samsung_i9505_galaxy_s4-5371.php
+
+192.168.0.4
+SM-A310F
+CPU: Quad-core 1.5 GHz Cortex-A53
+RAM: 1.5GB
+https://www.gsmarena.com/samsung_galaxy_a3_(2016)-7791.php
+
+192.168.0.5
+SM-G900F
+CPU: Octa-core 1.6 GHz Cortex-A53
+RAM: 2GB
+https://www.gsmarena.com/samsung_galaxy_s5-6033.php
+
+192.168.0.6
+SM-G903F
+CPU: Quad-core 2.5 GHz Krait 400
+RAM: 2GB
+https://www.gsmarena.com/samsung_galaxy_s5_neo-6506.php
+
+192.168.0.7
+SM-G900F
+CPU: Octa-core 1.6 GHz Cortex-A53
+RAM: 2GB
+https://www.gsmarena.com/samsung_galaxy_s5-6033.php
+
+192.168.0.8
+GT-I9506
+CPU: Quad-core 2.3 GHz Krait 400
+RAM: 2GB
+https://www.gsmarena.com/samsung_i9506_galaxy_s4-5542.php
+
+192.168.0.9
+SM-G920F
+CPU: Octa-core (4x2.1 GHz Cortex-A57 & 4x1.5 GHz Cortex-A53)
+RAM: 3GB
+https://www.gsmarena.com/samsung_galaxy_s6-6849.php
