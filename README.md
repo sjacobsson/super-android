@@ -29,21 +29,23 @@ Usually, if using the LineageOS custom recovery or TWRP, this is just
 ### Apps
 On the phone, install F-Droid from https://f-droid.org/. Then from F-Droid install
 1. Termux. In termux, run
-	1. `pkg upgrade -y`
-	2. `pkg install rust git make clang -y`
+	1. `yes | pkg upgrade`
+	2. `yes | pkg install rust git make clang`
 2. Advanced Charging Controller (ACCA).
 3. Keep Screen On, and add as quick settings tile.
 
 <!-- Then install gcc in termux by `pkg install clang`, and `rust` by `pkg install rust openssl`. -->
 
 ### Network
-Connect the phone to the router (dlink-5BF0) and set Static IP adress 192.168.0.X in the wifi settings.
 
 In termux, run
 1. `git clone https://github.com/eprovst/supanrf`
 2. `cd supanrf`
 3. `make`
 4. `su` (optional)
+
+Connect the phone to the router (dlink-5BF0) and set Static IP adress 192.168.0.X in the wifi settings.
+
 5. `./start-server`
 
 ETP should now be running on the server.
