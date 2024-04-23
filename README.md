@@ -16,7 +16,7 @@ TODO: Link to these.
 Look up if the device is supported and then follow the corresponding guide: https://wiki.lineageos.org/devices/
 
 
-### Root
+### Root (optional)
 Usually, if using the LineageOS custom recovery or TWRP, this is just 
 1. Download the Magisk .apk to the phone from their github
 2. Rename the .apk to .zip
