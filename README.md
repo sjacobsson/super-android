@@ -1,11 +1,12 @@
 Git repo for super android project. Distributed computing on android phones.
 
+![](./setup.jpg)
+
 # Table of available demos
 | Name | Description |
 | ---- | ----------- |
-| `Render farm` | Render some rad fractals |
+| [Render farm](https://github.com/eprovst/supanrf) | Render some rad fractals |
 
-TODO: Link to these.
 
 
 # Setting up a phone to be a server
